@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{%load static%}
+{% block title %}Our Story | Mithaas{% endblock %}
+{% block content %}
+<section class="page-hero">
+    <span class="eyebrow">OUR STORY</span>
+    <h1>Rooted in tradition.<br><em>Made with heart.</em></h1>
+    <p>Because the best memories often begin with something sweet.</p>
+</section>
+<section class="about-layout container">
+    <div class="about-photo">
+        <img src="{% static 'shop/img/sweetness.jpeg'%}" alt="Indian sweets ready to be shared">
+    </div>
+    <div class="about-copy">
+        <span class="eyebrow">WELCOME TO MITHAAS</span>
+        <h2>A little sweetness goes a <em>long way.</em></h2>
+        <p>Mithaas is a student-built sweet shop website inspired by the warmth of Indian celebrations and the joy of sharing traditional mithai.</p>
+        <p>Our idea is simple: present familiar favourites beautifully, make ordering straightforward, and help customers follow their order as it moves from the shop to their doorstep.</p>
+        <div class="values">
+            <div><b>01</b><span>Freshness first</span>
+            </div>
+            <div>
+                <b>02</b>
+                <span>Quality matters</span>
+            </div><div><b>03</b>
+                <span>Every order, cared for</span>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="delivery-cta container">
+    <div>
+        <span class="eyebrow">LET'S MAKE IT SWEET</span>
+        <h2>Celebrate the little things.</h2>
+        <p>Choose a favourite and place an order in just a few steps.</p>
+    </div>
+    <a class="btn btn-primary" href="{% url 'sweets' %}">Browse sweets ↗</a>
+</section>
+{% endblock %}

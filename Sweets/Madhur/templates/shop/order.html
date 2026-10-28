@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Place an Order | Mithaas{% endblock %}
+{% block content %}
+<section class="page-hero">
+    <span class="eyebrow">A FEW DETAILS AND YOU'RE DONE</span>
+    <h1>Order something <em>sweet.</em></h1>
+    <p>Fill in your details. Your order will be saved to the MySQL database.</p>
+</section>
+<section class="order-layout container">
+    <div class="order-intro">
+        <div class="order-image">
+            <img src="{% static 'shop/img/sweets.jpeg'%}" alt="A selection of Indian sweets">
+        </div>
+        <h2>Made for your moments.</h2>
+        <p>Choose your mithai and quantity. The total is calculated and saved when you submit.</p>
+        <div class="order-tip">🚚
+            <span>
+                <b>Delivery updates</b>
+                <br>Use your order number and phone number on the Track Delivery page.
+            </span>
+        </div>
+    </div>
+    <form method="post" class="form-card order-form">
+        {% csrf_token %}
+        <h2>Your delivery details</h2>
+        {% if form.non_field_errors %}
+        <div class="form-errors">
+            {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+        <div class="form-grid">
+            {% for field in form %}
+            <div class="field {% if field.name == 'address' or field.name == 'message' %}field-full{% endif %}">
+                <label for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                </label>
+                {{ field }}{% if field.errors %}
+                <small class="field-error">
+                    {{ field.errors|striptags }}
+                </small>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        <p class="form-note">Prices are shown per kilogram. Delivery charges, payment and live courier integrations are
+            not included in this student demo.</p>
+        <button class="btn btn-primary btn-wide" type="submit">Place my order ↗</button>
+    </form>
+</section>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Mithaas | Sweet Moments, Beautiful Memories{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow">A LITTLE BOX OF HAPPINESS</span>
+    <h1>Sweet moments,<br><em>beautiful memories.</em></h1>
+    <p>Discover the magic of Indian mithai, handcrafted fresh with time-honoured recipes and a whole lot of love.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{% url 'sweets' %}">Explore our sweets <span>↗</span></a>
+      <a class="text-link" href="{% url 'about' %}">Our story <span>→</span></a>
+    </div>
+    <div class="hero-note">
+      <span>★★★★★</span> Made fresh. Shared with love.</div>
+  </div>
+  <div class="hero-photo">
+    <img src="{% static 'shop/img/beautiful_sweet.jpg'%}" alt="Traditional Indian sweets arranged for serving">
+    <div class="photo-badge"><b>100%</b>
+      <span>Sweetness<br>guaranteed</span>
+    </div>
+    <div class="photo-caption">THE TASTE OF TRADITION</div>
+  </div>
+</section>
+<section class="trust-strip">
+  <div>
+    <span>✿</span><p><b>Fresh every day</b><small>Prepared in small batches</small></p>
+  </div>
+  <div>
+    <span>♡</span><p><b>Quality ingredients</b><small>Only the good stuff</small></p>
+  </div>
+  <div>
+    <span>♧</span><p><b>Made for sharing</b><small>Little joys, big smiles</small></p>
+  </div>
+</section>
+<section class="section-block">
+  <div class="section-heading">
+    <div>
+      <span class="eyebrow">THE CROWD FAVOURITES</span>
+      <h2>Something sweet for <em>everyone.</em></h2>
+    </div>
+    <a class="text-link" href="{% url 'sweets' %}">View all sweets →</a>
+  </div>
+  <div class="product-grid">
+    {% for product in products %}
+    <article class="product-card">
+      <a class="product-image" href="{% url 'place_order' %}?product={{ product.id }}">
+        <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">
+        <span class="image-tag">Bestseller</span>
+      </a>
+      <div class="product-info">
+        <div>
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.description }}</p>
+        </div>
+        <div class="product-bottom">
+          <strong>₹{{ product.price_per_kg }} <small>/ kg</small></strong>
+          <a class="round-arrow" href="{% url 'place_order' %}?product={{ product.id }}" aria-label="Order {{ product.name }}">↗</a>
+        </div>
+      </div>
+    </article>
+    {% empty %}
+    <p>No sweets yet. Add products from the admin panel.</p>
+    {% endfor %}
+  </div>
+</section>
+<section class="story-banner">
+  <div class="story-image">
+    <img src="{% static 'shop/img/Sweetness.jpeg'%}" alt="Indian festive sweets">
+  </div>
+  <div class="story-copy">
+    <span class="eyebrow">A TRADITION OF TASTE</span>
+    <h2>Some feelings are<br>best expressed <em>with mithai.</em></h2>
+    <p>From celebrations to everyday little wins, we bring a touch of sweetness to the moments that matter.</p>
+    <a class="btn btn-light" href="{% url 'about' %}">Get to know us →</a>
+  </div>
+</section>
+<section class="delivery-cta">
+  <div>
+    <span class="eyebrow">YOUR FAVOURITES, AT YOUR DOOR</span>
+    <h2>Ready to make today sweeter?</h2>
+    <p>Place your order and keep an eye on delivery from our tracking page.</p>
+  </div>
+  <a class="btn btn-primary" href="{% url 'place_order' %}">Order mithai ↗</a>
+</section>
+{% endblock %}

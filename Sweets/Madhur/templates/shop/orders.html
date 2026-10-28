@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Order Records | Mithaas{% endblock %}
+{% block content %}
+<section class="page-hero">
+    <span class="eyebrow">ORDER MANAGEMENT DEMO</span>
+    <h1>Order <em>records.</em></h1>
+    <p>This page is for learning/demo purposes. In a live store, protect customer records with staff login.</p>
+</section>
+<section class="container table-card">
+    <div class="table-scroll">
+        <table>
+            <thead>
+                <tr>
+                    <th>Order number</th>
+                    <th>Customer</th>
+                    <th>Sweet</th>
+                    <th>Qty (kg)</th>
+                    <th>Total</th>
+                    <th>Status / Delivery</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+{% for order in orders %}
+<tr>
+    <td>
+        <b>
+            {{ order.order_number }}
+        </b>
+    </td>
+    <td>
+        {{ order.customer_name }}
+        <br>
+        <small>
+            {{ order.phone }}
+        </small>
+    </td>
+    <td>
+        {{ order.product.name }}
+    </td>
+    <td>
+        {{ order.quantity_kg }}
+    </td>
+    <td>₹{{ order.total_amount }}</td>
+    <td>
+        <span class="status-pill">
+            {{ order.status }}</span>
+        </td>
+        <td>{{ order.created_at|date:"d M Y, h:i A" }}</td>
+    </tr>
+{% empty %}
+<tr>
+    <td colspan="7" class="empty-cell">No orders have been placed yet.</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+</section>
+{% endblock %}

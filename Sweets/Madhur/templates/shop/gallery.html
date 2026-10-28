@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Sweet Gallery | Mithaas
+{% endblock %}
+{% block content %}
+<section class="page-hero">
+    <span class="eyebrow">A FEAST FOR THE EYES</span>
+    <h1>Little pieces of <em>happiness.</em></h1>
+    <p>A glimpse of the sweet things we love.</p>
+</section>
+<section class="gallery-grid container">
+{% for product in products %}
+<figure class="gallery-item">
+    <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">
+    <figcaption><b>{{ product.name }}</b>
+        <span>₹{{ product.price_per_kg }} / kg</span>
+    </figcaption>
+</figure>
+{% endfor %}
+<figure class="gallery-item">
+    <img src="{% static 'shop/img/sweetness.jpeg'%}" alt="Traditional festive sweets">
+    <figcaption><b>Festive favourites</b>
+        <span>Made for sharing</span>
+    </figcaption>
+</figure>
+<figure class="gallery-item">
+    <img src="{% static 'shop/img/sweets.jpeg'%}" alt="Colourful Indian dessert">
+    <figcaption><b>Everyday treats</b>
+        <span>A little joy in every bite</span>
+    </figcaption>
+</figure>
+</section>
+{% endblock %}

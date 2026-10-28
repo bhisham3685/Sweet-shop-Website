@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Contact | Mithaas{% endblock %}
+{% block content %}
+<section class="page-hero">
+    <span class="eyebrow">WE'D LOVE TO HEAR FROM YOU</span>
+    <h1>Let's talk <em>mithai.</em></h1>
+    <p>Questions, celebrations, or special requests? Send us a message.</p>
+</section>
+<section class="contact-layout container">
+    <div class="contact-details">
+        <h2>Come say hello.</h2>
+        <p>We are a demo sweet-shop project based in Varanasi.</p>
+        <div class="contact-detail"><span>☎</span>
+            <div><b>Call us</b><p>+91 98765 43210</p>
+            </div>
+        </div>
+        <div class="contact-detail"><span>⌖</span>
+            <div><b>Find us</b><p>Varanasi, Uttar Pradesh, India</p>
+            </div>
+        </div>
+        <div class="contact-detail"><span>◷</span>
+            <div><b>Opening hours</b><p>Every day · 9 AM to 9 PM</p>
+            </div>
+        </div>
+    </div>
+<form method="post" class="form-card">{% csrf_token %}<h2>Send a message</h2>
+    <label for="name">Your name</label>
+    <input id="name" name="name" required maxlength="100" placeholder="Enter your name">
+    <label for="email">Email address (optional)</label>
+    <input id="email" name="email" type="email" placeholder="you@example.com">
+    <label for="message">Your message</label>
+    <textarea id="message" name="message" rows="5" required placeholder="How can we help?"></textarea>
+    <button class="btn btn-primary" type="submit">Send message ↗</button>
+</form>
+</section>
+{% endblock %}

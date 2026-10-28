@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Track Delivery | Mithaas{% endblock %}
+{% block content %}
+<section class="page-hero">
+    <span class="eyebrow">FROM OUR SHOP TO YOUR DOOR</span>
+    <h1>Track your <em>delivery.</em></h1>
+    <p>Enter the order number from your confirmation and the phone number used while ordering.</p>
+</section>
+<section class="track-layout container">
+    <form method="post" class="form-card track-form">
+        {% csrf_token %}
+        <h2>Find my order</h2>
+        <label for="order_number">Order number</label>
+        <input id="order_number" name="order_number" required placeholder="e.g. MT12AB34CD56">
+        <label for="phone">Mobile number</label>
+        <input id="phone" name="phone" required inputmode="tel" placeholder="Phone used for the order">
+        <button class="btn btn-primary btn-wide" type="submit">Track order ↗</button>
+    </form>
+{% if order %}
+<div class="tracking-card">
+    <span class="eyebrow">ORDER FOUND</span>
+    <h2>{{ order.order_number }}</h2>
+    <p>Hi {{ order.customer_name }}, here's the latest status.</p>
+    <div class="tracking-status">
+        <span class="status-dot"></span>
+        <div>
+            <b>{{ order.status }}</b>
+            <small>Last updated {{ order.updated_at|date:"d M Y, h:i A" }}</small>
+        </div>
+    </div>
+    <div class="receipt-row">
+        <span>Sweet</span>
+        <b>{{ order.product.name }}</b>
+    </div>
+    <div class="receipt-row">
+        <span>Quantity</span>
+        <b>{{ order.quantity_kg }} kg</b>
+    </div>
+    <div class="receipt-row">
+        <span>Delivery city</span>
+        <b>{{ order.city }}</b>
+    </div>
+    <div class="receipt-total">
+        <span>Total</span>
+        <strong>₹{{ order.total_amount }}</strong>
+    </div>
+    <div class="status-steps">
+        <span class="{% if order.status != 'Pending' %}done{% endif %}">Order received</span>
+        <span class="{% if order.status == 'Confirmed' or order.status == 'Preparing' or order.status == 'Out for delivery' or order.status == 'Delivered' %}done{% endif %}">Confirmed</span>
+        <span class="{% if order.status == 'Preparing' or order.status == 'Out for delivery' or order.status == 'Delivered' %}done{% endif %}">Preparing</span>
+        <span class="{% if order.status == 'Out for delivery' or order.status == 'Delivered' %}done{% endif %}">Out for delivery</span>
+        <span class="{% if order.status == 'Delivered' %}done{% endif %}">Delivered</span>
+    </div>
+</div>
+{% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Order Placed | Mithaas{% endblock %}
+{% block content %}
+<section class="success-wrap container">
+    <div class="success-icon">✓</div>
+    <span class="eyebrow">THANK YOU FOR CHOOSING MITHAAS</span>
+    <h1>Your order is <em>on its way to us!</em></h1>
+    <p>We have saved your order details. Keep your order number safe to check delivery progress.</p>
+<div class="receipt">
+    <div class="receipt-head">
+        <span>ORDER NUMBER</span>
+        <strong>{{ order.order_number }}</strong>
+    </div>
+    <div class="receipt-row">
+        <span>Customer</span>
+        <b>{{ order.customer_name }}</b>
+    </div>
+    <div class="receipt-row">
+        <span>Sweet</span>
+        <b>{{ order.product.name }}</b>
+    </div>
+    <div class="receipt-row">
+        <span>Quantity</span>
+        <b>{{ order.quantity_kg }} kg</b>
+    </div>
+    <div class="receipt-row">
+        <span>Delivery address</span>
+        <b>{{ order.address }}, {{ order.city }} - {{ order.pincode }}</b>
+    </div>
+    <div class="receipt-row">
+        <span>Status</span>
+        <b class="status-pill">{{ order.status }}</b>
+    </div>
+    <div class="receipt-total">
+        <span>Order total</span>
+        <strong>₹{{ order.total_amount }}</strong>
+    </div>
+</div>
+<div class="hero-actions center-actions">
+    <a class="btn btn-primary" href="{% url 'track_order' %}">Track delivery ↗</a>
+    <a class="btn btn-outline" href="{% url 'home' %}">Back to home</a>
+</div>
+</section>
+{% endblock %}
